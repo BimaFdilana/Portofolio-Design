@@ -18,6 +18,7 @@
   --nav-border: rgba(15, 23, 42, 0.05);
   --hover-border: rgba(29, 78, 216, 0.2);
   --hover-glow: rgba(29, 78, 216, 0.03);
+  --glow-interactive: rgba(37, 99, 235, 0.08);
 }
 
 .dark {
@@ -36,6 +37,33 @@
   --nav-border: rgba(255, 255, 255, 0.05);
   --hover-border: rgba(59, 130, 246, 0.35);
   --hover-glow: rgba(59, 130, 246, 0.05);
+  --glow-interactive: rgba(59, 130, 246, 0.15);
+}
+
+@keyframes float-slow {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(40px, -60px) scale(1.05);
+  }
+}
+
+@keyframes float-reverse {
+  0%, 100% {
+    transform: translate(0, 0) scale(1.05);
+  }
+  50% {
+    transform: translate(-50px, 40px) scale(0.95);
+  }
+}
+
+.animate-float-1 {
+  animation: float-slow 15s ease-in-out infinite;
+}
+
+.animate-float-2 {
+  animation: float-reverse 20s ease-in-out infinite;
 }
 
 @layer base {
