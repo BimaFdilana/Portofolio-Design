@@ -10,6 +10,11 @@ export interface HeroData {
 export interface AboutData {
   bio: string;
   imageUrl: string;
+  name: string;
+  education: string;
+  educationInstitution: string;
+  languagePrimary: string;
+  languageSecondary: string;
 }
 
 export interface SkillData {

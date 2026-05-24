@@ -1,5 +1,6 @@
 "use client";
 
+import { motion } from "framer-motion";
 import { User } from "lucide-react";
 import { PortfolioData } from "../types/portfolio";
 
@@ -8,83 +9,117 @@ interface AboutProps {
 }
 
 export default function About({ data }: AboutProps) {
+  const { about } = data;
+
+  const infoItems = [
+    {
+      label: "Nama",
+      value: about.name || data.hero.name,
+      sub: "Full Name",
+      color: "#8b5cf6",
+    },
+    {
+      label: "Pendidikan",
+      value: about.education || "S1 Ilmu Komputer",
+      sub: about.educationInstitution || "Universitas Indonesia",
+      color: "#6366f1",
+    },
+    {
+      label: "Bahasa",
+      value: about.languagePrimary || "Indonesia (Native)",
+      sub: about.languageSecondary || "English (Professional)",
+      color: "#ec4899",
+    },
+  ];
+
   return (
     <section id="about" className="py-32 px-6 max-w-6xl mx-auto">
       <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-20 items-center">
-        {/* Portrait Column */}
-        <div className="md:col-span-5 relative group">
-          <div className="absolute inset-0 border border-blue-500/20 dark:border-blue-900/30 rounded-2xl -rotate-3 group-hover:rotate-0 transition-transform duration-500 pointer-events-none -z-10" />
-          <div className="absolute inset-0 bg-gradient-to-tr from-blue-500/10 to-cyan-500/5 rounded-2xl pointer-events-none z-10" />
-          <img
-            src={data.about.imageUrl}
-            alt="Developer Bio Avatar"
-            className="w-full h-[400px] object-cover rounded-2xl shadow-2xl relative"
-          />
-        </div>
 
-        {/* Biography Column */}
-        <div className="md:col-span-7">
-          <div className="mb-8">
-            <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4 flex items-center gap-3 text-slate-900 dark:text-white">
-              <User className="w-6 h-6 text-blue-500" />
-              About Me
-            </h2>
-            <div className="w-20 h-[2px] bg-blue-600 rounded" />
+        {/* Portrait */}
+        <motion.div
+          initial={{ opacity: 0, x: -40 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
+          className="md:col-span-5 relative group"
+        >
+          {/* Colorful border */}
+          <div
+            className="absolute -inset-1 rounded-2xl opacity-60 group-hover:opacity-100 transition-opacity duration-500 blur-sm"
+            style={{ background: "linear-gradient(135deg, #6366f1, #ec4899, #06b6d4, #f59e0b)" }}
+          />
+          <div className="relative rounded-2xl overflow-hidden">
+            <div
+              className="absolute inset-0 z-10 opacity-30"
+              style={{ background: "linear-gradient(135deg, rgba(99,102,241,0.4), rgba(236,72,153,0.2))" }}
+            />
+            <img
+              src={about.imageUrl}
+              alt={about.name || "Developer Bio Avatar"}
+              className="w-full h-[420px] object-cover relative"
+            />
           </div>
 
-          <p className="text-slate-600 dark:text-gray-300 leading-relaxed text-base md:text-lg mb-8">
-            {data.about.bio}
+          {/* Floating badge */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.5 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.4, type: "spring" }}
+            className="absolute -bottom-4 -right-4 glass-card px-4 py-3 rounded-xl"
+          >
+            <p className="text-xs text-slate-500 dark:text-slate-400">Currently</p>
+            <p className="font-bold text-sm text-gradient">Open to Work</p>
+          </motion.div>
+        </motion.div>
+
+        {/* Bio */}
+        <motion.div
+          initial={{ opacity: 0, x: 40 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, delay: 0.1 }}
+          className="md:col-span-7"
+        >
+          <div className="mb-8">
+            <div className="flex items-center gap-3 mb-4">
+              <div
+                className="w-10 h-10 rounded-xl flex items-center justify-center"
+                style={{ background: "linear-gradient(135deg, #06b6d4, #6366f1)" }}
+              >
+                <User className="w-5 h-5 text-white" />
+              </div>
+              <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900 dark:text-white">
+                About Me
+              </h2>
+            </div>
+            <div
+              className="h-[3px] w-24 rounded-full"
+              style={{ background: "linear-gradient(90deg, #06b6d4, #6366f1)" }}
+            />
+          </div>
+
+          <p className="text-slate-600 dark:text-slate-300 leading-relaxed text-base md:text-lg mb-8">
+            {about.bio}
           </p>
 
-          <div className="glass-card grid grid-cols-1 sm:grid-cols-2 gap-6 p-6 rounded-2xl">
-            <div>
-              <h4 className="text-xs text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-1">
-                Pendidikan / Tamatan
-              </h4>
-              <p className="font-semibold text-slate-900 dark:text-white text-sm sm:text-base">
-                S1 Ilmu Komputer
-              </p>
-              <span className="text-[10px] text-slate-500 dark:text-gray-400">
-                Universitas Indonesia
-              </span>
-            </div>
-            <div>
-              <h4 className="text-xs text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-1">
-                Bahasa
-              </h4>
-              <div className="space-y-0.5">
-                <p className="font-semibold text-slate-900 dark:text-white text-sm">
-                  Indonesia{" "}
-                  <span className="text-slate-500 dark:text-gray-400 font-normal text-xs">
-                    (Native)
-                  </span>
-                </p>
-                <p className="font-semibold text-slate-900 dark:text-white text-sm">
-                  English{" "}
-                  <span className="text-slate-500 dark:text-gray-400 font-normal text-xs">
-                    (Professional)
-                  </span>
-                </p>
+          {/* Info grid — 3 items: Nama, Pendidikan, Bahasa */}
+          <div className="glass-card grid grid-cols-1 sm:grid-cols-3 gap-6 p-6 rounded-2xl">
+            {infoItems.map((item, i) => (
+              <div key={i}>
+                <h4
+                  className="text-[10px] uppercase tracking-widest mb-1 font-bold"
+                  style={{ color: item.color }}
+                >
+                  {item.label}
+                </h4>
+                <p className="font-semibold text-slate-900 dark:text-white text-sm">{item.value}</p>
+                <span className="text-[11px] text-slate-500 dark:text-slate-400">{item.sub}</span>
               </div>
-            </div>
-            <div className="border-t border-slate-200/60 dark:border-white/5 pt-4">
-              <h4 className="text-xs text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-1">
-                Arsitektur
-              </h4>
-              <p className="font-semibold text-slate-900 dark:text-white text-sm">
-                Next.js App Router & Framer Motion
-              </p>
-            </div>
-            <div className="border-t border-slate-200/60 dark:border-white/5 pt-4">
-              <h4 className="text-xs text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-1">
-                Database & Cloud
-              </h4>
-              <p className="font-semibold text-slate-900 dark:text-white text-sm">
-                Appwrite Backend & Vercel
-              </p>
-            </div>
+            ))}
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

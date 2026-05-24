@@ -26,6 +26,11 @@ const DEFAULT_DATA: PortfolioData = {
   about: {
     bio: "I am a full-stack developer dedicated to building high-performance web applications. My philosophy centers on clean typography, logical structures, and responsive micro-interactions inspired by Apple's digital product designs. I enjoy turning complex challenges into elegant, maintainable code.",
     imageUrl: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=800",
+    name: "Alex Thorne",
+    education: "S1 Ilmu Komputer",
+    educationInstitution: "Universitas Indonesia",
+    languagePrimary: "Indonesia (Native)",
+    languageSecondary: "English (Professional)",
   },
   skills: [
     { name: "Next.js", category: "Frontend" },
@@ -103,16 +108,23 @@ export default function Home() {
     setTimeout(() => setCopiedKey(null), 2000);
   };
 
-  // Load custom data from localStorage if updated via admin panel
+  // Load data: coba dari Appwrite DB dulu, fallback ke localStorage, lalu DEFAULT_DATA
   useEffect(() => {
-    const savedData = localStorage.getItem("portfolio_data");
-    if (savedData) {
-      try {
-        setData(JSON.parse(savedData));
-      } catch (e) {
-        console.error("Failed to load custom portfolio data:", e);
-      }
-    }
+    import("../lib/portfolio-db").then(({ fetchPortfolioData }) => {
+      fetchPortfolioData(DEFAULT_DATA)
+        .then((fetched) => {
+          setData(fetched);
+          // Cache ke localStorage agar tersedia offline
+          localStorage.setItem("portfolio_data", JSON.stringify(fetched));
+        })
+        .catch(() => {
+          // Appwrite gagal — coba localStorage
+          const saved = localStorage.getItem("portfolio_data");
+          if (saved) {
+            try { setData(JSON.parse(saved)); } catch {}
+          }
+        });
+    });
   }, []);
 
   // Track page scroll to activate navbar styling
@@ -155,12 +167,13 @@ export default function Home() {
   const heroOpacity = useTransform(scrollY, [0, 400], [1, 0]);
 
   return (
-    <div className="relative min-h-screen bg-background text-foreground font-sans selection:bg-blue-500/20 selection:text-foreground overflow-hidden">
+    <div className="relative min-h-screen bg-background text-foreground font-sans selection:bg-violet-500/20 selection:text-foreground overflow-hidden">
       
-      {/* Global Background Blobs for Glassmorphism backdrop-blur depth */}
-      <div className="absolute top-[15%] left-[-10%] w-[35vw] h-[35vw] min-w-[300px] min-h-[300px] rounded-full bg-gradient-to-tr from-blue-500/10 to-indigo-500/5 dark:from-blue-600/10 dark:to-purple-900/10 blur-[100px] pointer-events-none -z-10 animate-float-1" />
-      <div className="absolute top-[45%] right-[-10%] w-[40vw] h-[40vw] min-w-[350px] min-h-[350px] rounded-full bg-gradient-to-br from-amber-500/5 to-pink-500/5 dark:from-indigo-900/10 dark:to-blue-600/10 blur-[120px] pointer-events-none -z-10 animate-float-2" />
-      <div className="absolute bottom-[10%] left-[-5%] w-[35vw] h-[35vw] min-w-[300px] min-h-[300px] rounded-full bg-gradient-to-tr from-cyan-500/5 to-blue-500/10 dark:from-purple-900/10 dark:to-blue-900/10 blur-[110px] pointer-events-none -z-10 animate-float-1" />
+      {/* Global colorful background blobs */}
+      <div className="absolute top-[15%] left-[-8%] w-[40vw] h-[40vw] min-w-[320px] min-h-[320px] rounded-full bg-gradient-to-tr from-violet-500/12 to-indigo-500/8 dark:from-violet-600/18 dark:to-indigo-900/12 blur-[120px] pointer-events-none -z-10 animate-float-1" />
+      <div className="absolute top-[50%] right-[-8%] w-[45vw] h-[45vw] min-w-[360px] min-h-[360px] rounded-full bg-gradient-to-br from-pink-500/10 to-rose-500/8 dark:from-pink-600/15 dark:to-rose-900/12 blur-[130px] pointer-events-none -z-10 animate-float-2" />
+      <div className="absolute bottom-[15%] left-[-5%] w-[38vw] h-[38vw] min-w-[300px] min-h-[300px] rounded-full bg-gradient-to-tr from-cyan-500/10 to-teal-500/8 dark:from-cyan-600/15 dark:to-teal-900/12 blur-[115px] pointer-events-none -z-10 animate-float-3" />
+      <div className="absolute top-[70%] right-[20%] w-[30vw] h-[30vw] min-w-[250px] min-h-[250px] rounded-full bg-gradient-to-bl from-amber-500/8 to-orange-500/6 dark:from-amber-600/12 dark:to-orange-900/10 blur-[100px] pointer-events-none -z-10 animate-float-1" />
 
       <Navbar 
         data={data}
