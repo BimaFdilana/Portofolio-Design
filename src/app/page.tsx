@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState, useRef } from "react";
-import { motion, useScroll, useSpring, useTransform } from "framer-motion";
+import { motion, useScroll, useSpring, useTransform, useMotionValue, useMotionTemplate } from "framer-motion";
 import { 
   Github, 
   Linkedin, 
@@ -87,16 +87,15 @@ export default function Home() {
   const [formStatus, setFormStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
   const [copiedKey, setCopiedKey] = useState<string | null>(null);
   const [theme, setTheme] = useState<"light" | "dark">("dark");
-  const heroRef = useRef<HTMLDivElement>(null);
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!heroRef.current) return;
-    const { left, top } = heroRef.current.getBoundingClientRect();
-    const x = e.clientX - left;
-    const y = e.clientY - top;
-    heroRef.current.style.setProperty("--mouse-x", `${x}px`);
-    heroRef.current.style.setProperty("--mouse-y", `${y}px`);
-  };
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  function handleMouseMove({ currentTarget, clientX, clientY }: React.MouseEvent) {
+    const { left, top } = currentTarget.getBoundingClientRect();
+    mouseX.set(clientX - left);
+    mouseY.set(clientY - top);
+  }
 
   useEffect(() => {
     const savedTheme = localStorage.getItem("portfolio_theme") as "light" | "dark" | null;
@@ -206,8 +205,8 @@ export default function Home() {
       <div className="absolute inset-0 grid-pattern [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none -z-10" />
 
       {/* Floating Ambient Glows */}
-      <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full bg-[var(--glow-1)] blur-[120px] pointer-events-none -z-10 animate-float-1" />
-      <div className="absolute top-[30%] right-[-10%] w-[45%] h-[45%] rounded-full bg-[var(--glow-2)] blur-[120px] pointer-events-none -z-10 animate-float-2" />
+      <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full bg-[var(--glow-1)] blur-[120px] pointer-events-none -z-10" />
+      <div className="absolute top-[30%] right-[-10%] w-[45%] h-[45%] rounded-full bg-[var(--glow-2)] blur-[120px] pointer-events-none -z-10" />
 
       {/* Navigation */}
       <nav className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
@@ -304,20 +303,32 @@ export default function Home() {
         )}
       </nav>
 
-      {/* Hero Section */}
+      {/* Hero Section with Interactive Background Spotlight & Animations */}
       <section 
         id="hero" 
-        ref={heroRef}
         onMouseMove={handleMouseMove}
         className="relative min-h-screen flex items-center justify-center px-6 pt-20 overflow-hidden group/hero"
       >
-        {/* Interactive Spotlight background */}
-        <div 
-          className="absolute inset-0 opacity-0 group-hover/hero:opacity-100 transition-opacity duration-700 pointer-events-none -z-10"
+        {/* Interactive Radial Spotlight */}
+        <motion.div 
+          className="absolute inset-0 pointer-events-none -z-10 transition-opacity duration-500 opacity-0 group-hover/hero:opacity-100"
           style={{
-            background: "radial-gradient(700px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), var(--glow-interactive), transparent 80%)"
+            background: useMotionTemplate`radial-gradient(600px circle at ${mouseX}px ${mouseY}px, var(--spotlight-color), transparent 80%)`
           }}
         />
+
+        {/* Spotlight Grid Reveal */}
+        <motion.div 
+          className="absolute inset-0 grid-pattern pointer-events-none -z-10 transition-opacity duration-500 opacity-0 group-hover/hero:opacity-100"
+          style={{
+            maskImage: useMotionTemplate`radial-gradient(400px circle at ${mouseX}px ${mouseY}px, black 40%, transparent 100%)`,
+            WebkitMaskImage: useMotionTemplate`radial-gradient(400px circle at ${mouseX}px ${mouseY}px, black 40%, transparent 100%)`
+          }}
+        />
+
+        {/* Floating gradient blobs for depth */}
+        <div className="absolute top-1/4 left-1/4 w-[280px] h-[280px] rounded-full bg-gradient-to-tr from-blue-500/10 to-amber-500/5 dark:from-blue-600/15 dark:to-indigo-900/10 blur-[85px] pointer-events-none -z-20 animate-float-1" />
+        <div className="absolute bottom-1/4 right-1/4 w-[320px] h-[320px] rounded-full bg-gradient-to-br from-amber-500/5 to-cyan-500/10 dark:from-indigo-900/10 dark:to-blue-600/15 blur-[95px] pointer-events-none -z-20 animate-float-2" />
         <motion.div 
           style={{ y: heroY, opacity: heroOpacity }}
           className="text-center max-w-3xl"

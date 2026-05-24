@@ -18,7 +18,7 @@
   --nav-border: rgba(15, 23, 42, 0.05);
   --hover-border: rgba(29, 78, 216, 0.2);
   --hover-glow: rgba(29, 78, 216, 0.03);
-  --glow-interactive: rgba(37, 99, 235, 0.08);
+  --spotlight-color: rgba(37, 99, 235, 0.08);
 }
 
 .dark {
@@ -37,33 +37,7 @@
   --nav-border: rgba(255, 255, 255, 0.05);
   --hover-border: rgba(59, 130, 246, 0.35);
   --hover-glow: rgba(59, 130, 246, 0.05);
-  --glow-interactive: rgba(59, 130, 246, 0.15);
-}
-
-@keyframes float-slow {
-  0%, 100% {
-    transform: translate(0, 0) scale(1);
-  }
-  50% {
-    transform: translate(40px, -60px) scale(1.05);
-  }
-}
-
-@keyframes float-reverse {
-  0%, 100% {
-    transform: translate(0, 0) scale(1.05);
-  }
-  50% {
-    transform: translate(-50px, 40px) scale(0.95);
-  }
-}
-
-.animate-float-1 {
-  animation: float-slow 15s ease-in-out infinite;
-}
-
-.animate-float-2 {
-  animation: float-reverse 20s ease-in-out infinite;
+  --spotlight-color: rgba(59, 130, 246, 0.15);
 }
 
 @layer base {
@@ -151,4 +125,33 @@
 @keyframes scrollProgress {
   from { width: 0%; }
   to { width: 100%; }
+}
+
+/* Premium Background Grid Pattern */
+.grid-pattern {
+  background-image: linear-gradient(var(--grid-color) 1px, transparent 1px),
+                    linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+  background-size: 50px 50px;
+}
+
+/* Floating animation keyframes for visual depth */
+@keyframes float-slow {
+  0% { transform: translate(0px, 0px) scale(1); }
+  33% { transform: translate(40px, -60px) scale(1.15); }
+  66% { transform: translate(-30px, 30px) scale(0.9); }
+  100% { transform: translate(0px, 0px) scale(1); }
+}
+
+@keyframes float-medium {
+  0% { transform: translate(0px, 0px) scale(1); }
+  50% { transform: translate(-50px, 40px) scale(0.95); }
+  100% { transform: translate(0px, 0px) scale(1); }
+}
+
+.animate-float-1 {
+  animation: float-slow 22s infinite ease-in-out;
+}
+
+.animate-float-2 {
+  animation: float-medium 28s infinite ease-in-out;
 }
