@@ -5,39 +5,39 @@
 :root {
   --background: #f5f5f7;
   --foreground: #0f172a;
-  --card-bg: #ffffff;
-  --card-border: rgba(15, 23, 42, 0.05);
-  --grid-color: rgba(15, 23, 42, 0.03);
+  --card-bg: rgba(255, 255, 255, 0.45);
+  --card-border: rgba(15, 23, 42, 0.08);
+  --grid-color: rgba(15, 23, 42, 0.06);
   --glow-1: rgba(37, 99, 235, 0.05);
   --glow-2: rgba(245, 158, 11, 0.06);
   --text-gradient: linear-gradient(135deg, #0f172a 30%, #1d4ed8 70%, #d97706 100%);
   --scrollbar-track: #f1f5f9;
   --scrollbar-thumb: #cbd5e1;
   --scrollbar-thumb-hover: #94a3b8;
-  --glass-navbar: rgba(245, 245, 247, 0.75);
-  --nav-border: rgba(15, 23, 42, 0.05);
+  --glass-navbar: rgba(245, 245, 247, 0.45);
+  --nav-border: rgba(15, 23, 42, 0.08);
   --hover-border: rgba(29, 78, 216, 0.2);
   --hover-glow: rgba(29, 78, 216, 0.03);
-  --spotlight-color: rgba(37, 99, 235, 0.08);
+  --spotlight-color: rgba(37, 99, 235, 0.15);
 }
 
 .dark {
   --background: #050814;
   --foreground: #f8fafc;
-  --card-bg: rgba(15, 23, 42, 0.45);
-  --card-border: rgba(255, 255, 255, 0.03);
-  --grid-color: rgba(255, 255, 255, 0.02);
+  --card-bg: rgba(15, 23, 42, 0.3);
+  --card-border: rgba(255, 255, 255, 0.05);
+  --grid-color: rgba(255, 255, 255, 0.08);
   --glow-1: rgba(30, 58, 138, 0.15);
   --glow-2: rgba(15, 23, 42, 0.2);
   --text-gradient: linear-gradient(135deg, #ffffff 30%, #3b82f6 75%, #1d4ed8 100%);
   --scrollbar-track: #050814;
   --scrollbar-thumb: #1c2541;
   --scrollbar-thumb-hover: #3a506b;
-  --glass-navbar: rgba(5, 8, 20, 0.75);
+  --glass-navbar: rgba(5, 8, 20, 0.45);
   --nav-border: rgba(255, 255, 255, 0.05);
   --hover-border: rgba(59, 130, 246, 0.35);
   --hover-glow: rgba(59, 130, 246, 0.05);
-  --spotlight-color: rgba(59, 130, 246, 0.15);
+  --spotlight-color: rgba(59, 130, 246, 0.25);
 }
 
 @layer base {
@@ -81,17 +81,17 @@
 
 .glass-card {
   background: var(--card-bg);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border: 1px solid var(--card-border);
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.01), 0 2px 4px -1px rgba(0, 0, 0, 0.01);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.04);
   transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .glass-card:hover {
   border-color: var(--hover-border);
   transform: translateY(-4px);
-  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.04), 0 0 40px var(--hover-glow);
+  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.06), 0 0 40px var(--hover-glow);
 }
 
 .dark .glass-card {
