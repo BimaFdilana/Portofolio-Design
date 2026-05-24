@@ -7,6 +7,7 @@ A minimalist, modern, and highly interactive developer portfolio website designe
 ## ✨ Features
 
 - **Apple Aesthetic**: Premium, clean design using HSL tailored colors (primarily Black, White, and Deep Navy Blue) with glassmorphism and subtle micro-animations.
+- **Light/Dark Mode Toggler**: Smooth, instant theme switching between Dark mode (black/navy background, white text) and Light mode (pure white background, slate-blue text, and gold/yellow highlights).
 - **Single Page Interface**: Smooth scroll transitions, parallax effects, and scroll-reveal animations.
 - **Scroll Navigation Indicator**: Dynamic progress bar and active section highlight on the navbar.
 - **Interactive Coffee Donation & Social Links**: A dedicated "Send me coffe" section featuring:

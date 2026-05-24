@@ -163,10 +163,10 @@ export default function AdminPanel() {
     <div className="min-h-screen bg-navy-950 text-white font-sans">
       
       {/* Top Banner indicating mock integration */}
-      <div className="bg-indigo-600/10 border-b border-indigo-500/20 py-3 px-6">
-        <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-indigo-200">
+      <div className="bg-blue-600/10 border-b border-blue-500/20 py-3 px-6">
+        <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-blue-200">
           <div className="flex items-center gap-2">
-            <Database className="w-4 h-4 text-indigo-400 animate-pulse" />
+            <Database className="w-4 h-4 text-blue-400 animate-pulse" />
             <span><strong>Mock Integration Active:</strong> Changes are saved to browser local storage. Connect to Appwrite database in backend to persist.</span>
           </div>
           <button 
@@ -197,7 +197,7 @@ export default function AdminPanel() {
           <button
             onClick={handleSave}
             disabled={saveStatus === "saving"}
-            className="px-5 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold transition-all flex items-center gap-2 disabled:opacity-50"
+            className="px-5 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold transition-all flex items-center gap-2 disabled:opacity-50"
           >
             {saveStatus === "saving" ? (
               <>
@@ -243,7 +243,7 @@ export default function AdminPanel() {
                 onClick={() => setActiveTab(tab.id as any)}
                 className={`w-full p-4 rounded-xl text-left text-sm font-semibold flex items-center gap-3 transition-all ${
                   activeTab === tab.id 
-                    ? "bg-indigo-600/10 text-indigo-400 border-l-2 border-indigo-500 font-bold" 
+                    ? "bg-blue-600/10 text-blue-400 border-l-2 border-blue-500 font-bold" 
                     : "bg-white/[0.02] text-gray-400 hover:bg-white/[0.05] hover:text-white"
                 }`}
               >
@@ -278,7 +278,7 @@ export default function AdminPanel() {
                       ...data,
                       hero: { ...data.hero, name: e.target.value }
                     })}
-                    className="w-full px-4 py-3 rounded-lg bg-black/40 border border-white/10 text-white focus:outline-none focus:border-indigo-500 text-sm"
+                    className="w-full px-4 py-3 rounded-lg bg-black/40 border border-white/10 text-white focus:outline-none focus:border-blue-500 text-sm"
                   />
                 </div>
                 <div>
@@ -290,7 +290,7 @@ export default function AdminPanel() {
                       ...data,
                       hero: { ...data.hero, title: e.target.value }
                     })}
-                    className="w-full px-4 py-3 rounded-lg bg-black/40 border border-white/10 text-white focus:outline-none focus:border-indigo-500 text-sm"
+                    className="w-full px-4 py-3 rounded-lg bg-black/40 border border-white/10 text-white focus:outline-none focus:border-blue-500 text-sm"
                   />
                 </div>
               </div>
@@ -304,7 +304,7 @@ export default function AdminPanel() {
                     ...data,
                     hero: { ...data.hero, subtitle: e.target.value }
                   })}
-                  className="w-full px-4 py-3 rounded-lg bg-black/40 border border-white/10 text-white focus:outline-none focus:border-indigo-500 text-sm resize-none"
+                  className="w-full px-4 py-3 rounded-lg bg-black/40 border border-white/10 text-white focus:outline-none focus:border-blue-500 text-sm resize-none"
                 />
               </div>
 
@@ -318,7 +318,7 @@ export default function AdminPanel() {
                       ...data,
                       hero: { ...data.hero, githubUrl: e.target.value }
                     })}
-                    className="w-full px-4 py-3 rounded-lg bg-black/40 border border-white/10 text-white focus:outline-none focus:border-indigo-500 text-sm"
+                    className="w-full px-4 py-3 rounded-lg bg-black/40 border border-white/10 text-white focus:outline-none focus:border-blue-500 text-sm"
                   />
                 </div>
                 <div>
@@ -330,7 +330,7 @@ export default function AdminPanel() {
                       ...data,
                       hero: { ...data.hero, linkedinUrl: e.target.value }
                     })}
-                    className="w-full px-4 py-3 rounded-lg bg-black/40 border border-white/10 text-white focus:outline-none focus:border-indigo-500 text-sm"
+                    className="w-full px-4 py-3 rounded-lg bg-black/40 border border-white/10 text-white focus:outline-none focus:border-blue-500 text-sm"
                   />
                 </div>
               </div>
@@ -350,7 +350,7 @@ export default function AdminPanel() {
                     ...data,
                     about: { ...data.about, bio: e.target.value }
                   })}
-                  className="w-full px-4 py-3 rounded-lg bg-black/40 border border-white/10 text-white focus:outline-none focus:border-indigo-500 text-sm resize-none leading-relaxed"
+                  className="w-full px-4 py-3 rounded-lg bg-black/40 border border-white/10 text-white focus:outline-none focus:border-blue-500 text-sm resize-none leading-relaxed"
                 />
               </div>
 
@@ -363,7 +363,7 @@ export default function AdminPanel() {
                     ...data,
                     about: { ...data.about, imageUrl: e.target.value }
                   })}
-                  className="w-full px-4 py-3 rounded-lg bg-black/40 border border-white/10 text-white focus:outline-none focus:border-indigo-500 text-sm"
+                  className="w-full px-4 py-3 rounded-lg bg-black/40 border border-white/10 text-white focus:outline-none focus:border-blue-500 text-sm"
                 />
               </div>
             </div>
@@ -376,7 +376,7 @@ export default function AdminPanel() {
                 <h2 className="text-lg font-bold">Capabilities & Stack</h2>
                 <button
                   onClick={handleAddSkill}
-                  className="px-3 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold flex items-center gap-1 transition-all"
+                  className="px-3 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold flex items-center gap-1 transition-all"
                 >
                   <Plus className="w-3.5 h-3.5" />
                   <span>Add Skill</span>
@@ -393,14 +393,14 @@ export default function AdminPanel() {
                           value={skill.name}
                           placeholder="Skill Name"
                           onChange={(e) => handleUpdateSkill(index, "name", e.target.value)}
-                          className="w-full px-3 py-2 rounded-lg bg-black/40 border border-white/10 text-white focus:outline-none focus:border-indigo-500 text-sm"
+                          className="w-full px-3 py-2 rounded-lg bg-black/40 border border-white/10 text-white focus:outline-none focus:border-blue-500 text-sm"
                         />
                       </div>
                       <div>
                         <select
                           value={skill.category}
                           onChange={(e) => handleUpdateSkill(index, "category", e.target.value)}
-                          className="w-full px-3 py-2 rounded-lg bg-black/40 border border-white/10 text-white focus:outline-none focus:border-indigo-500 text-sm"
+                          className="w-full px-3 py-2 rounded-lg bg-black/40 border border-white/10 text-white focus:outline-none focus:border-blue-500 text-sm"
                         >
                           <option value="Frontend">Frontend</option>
                           <option value="Backend">Backend</option>
@@ -429,7 +429,7 @@ export default function AdminPanel() {
                 <h2 className="text-lg font-bold">Featured Projects</h2>
                 <button
                   onClick={handleAddProject}
-                  className="px-3 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold flex items-center gap-1 transition-all"
+                  className="px-3 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold flex items-center gap-1 transition-all"
                 >
                   <Plus className="w-3.5 h-3.5" />
                   <span>Add Project</span>
@@ -446,7 +446,7 @@ export default function AdminPanel() {
                       <Trash className="w-4 h-4" />
                     </button>
 
-                    <h3 className="text-sm font-semibold text-indigo-400">Project #{index + 1}</h3>
+                    <h3 className="text-sm font-semibold text-blue-400">Project #{index + 1}</h3>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div>
@@ -455,7 +455,7 @@ export default function AdminPanel() {
                           type="text"
                           value={project.title}
                           onChange={(e) => handleUpdateProject(index, "title", e.target.value)}
-                          className="w-full px-3 py-2 rounded-lg bg-black/40 border border-white/10 text-white focus:outline-none focus:border-indigo-500 text-xs"
+                          className="w-full px-3 py-2 rounded-lg bg-black/40 border border-white/10 text-white focus:outline-none focus:border-blue-500 text-xs"
                         />
                       </div>
                       <div>
@@ -464,7 +464,7 @@ export default function AdminPanel() {
                           type="url"
                           value={project.link}
                           onChange={(e) => handleUpdateProject(index, "link", e.target.value)}
-                          className="w-full px-3 py-2 rounded-lg bg-black/40 border border-white/10 text-white focus:outline-none focus:border-indigo-500 text-xs"
+                          className="w-full px-3 py-2 rounded-lg bg-black/40 border border-white/10 text-white focus:outline-none focus:border-blue-500 text-xs"
                         />
                       </div>
                     </div>
@@ -476,7 +476,7 @@ export default function AdminPanel() {
                           type="text"
                           value={project.image}
                           onChange={(e) => handleUpdateProject(index, "image", e.target.value)}
-                          className="w-full px-3 py-2 rounded-lg bg-black/40 border border-white/10 text-white focus:outline-none focus:border-indigo-500 text-xs"
+                          className="w-full px-3 py-2 rounded-lg bg-black/40 border border-white/10 text-white focus:outline-none focus:border-blue-500 text-xs"
                         />
                       </div>
                       <div>
@@ -485,7 +485,7 @@ export default function AdminPanel() {
                           type="text"
                           value={project.tags.join(", ")}
                           onChange={(e) => handleUpdateProject(index, "tags", e.target.value.split(",").map(t => t.trim()))}
-                          className="w-full px-3 py-2 rounded-lg bg-black/40 border border-white/10 text-white focus:outline-none focus:border-indigo-500 text-xs"
+                          className="w-full px-3 py-2 rounded-lg bg-black/40 border border-white/10 text-white focus:outline-none focus:border-blue-500 text-xs"
                         />
                       </div>
                     </div>
@@ -496,7 +496,7 @@ export default function AdminPanel() {
                         rows={2}
                         value={project.description}
                         onChange={(e) => handleUpdateProject(index, "description", e.target.value)}
-                        className="w-full px-3 py-2 rounded-lg bg-black/40 border border-white/10 text-white focus:outline-none focus:border-indigo-500 text-xs resize-none"
+                        className="w-full px-3 py-2 rounded-lg bg-black/40 border border-white/10 text-white focus:outline-none focus:border-blue-500 text-xs resize-none"
                       />
                     </div>
                   </div>
@@ -519,7 +519,7 @@ export default function AdminPanel() {
                       ...data,
                       contact: { ...data.contact, email: e.target.value }
                     })}
-                    className="w-full px-4 py-3 rounded-lg bg-black/40 border border-white/10 text-white focus:outline-none focus:border-indigo-500 text-sm"
+                    className="w-full px-4 py-3 rounded-lg bg-black/40 border border-white/10 text-white focus:outline-none focus:border-blue-500 text-sm"
                   />
                 </div>
                 <div>
@@ -531,7 +531,7 @@ export default function AdminPanel() {
                       ...data,
                       contact: { ...data.contact, location: e.target.value }
                     })}
-                    className="w-full px-4 py-3 rounded-lg bg-black/40 border border-white/10 text-white focus:outline-none focus:border-indigo-500 text-sm"
+                    className="w-full px-4 py-3 rounded-lg bg-black/40 border border-white/10 text-white focus:outline-none focus:border-blue-500 text-sm"
                   />
                 </div>
               </div>
